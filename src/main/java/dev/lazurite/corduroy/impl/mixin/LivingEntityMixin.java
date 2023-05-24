@@ -16,6 +16,7 @@ public class LivingEntityMixin {
      */
     @Inject(method = "kill", at = @At("HEAD"))
     public void kill$HEAD(CallbackInfo ci) {
+        // noinspection ConstantValue
         if ((LivingEntity) (Object) this instanceof LocalPlayer) {
             ViewStack.getInstance().clear();
         }

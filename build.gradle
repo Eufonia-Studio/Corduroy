@@ -38,23 +38,19 @@ allprojects {
 }
 
 publishing {
-	repositories {
-		mavenLocal()
-
-		maven {
-			name 'Lazurite'
-			url 'https://lazurite.dev/releases'
-
-			credentials {
-				username property('publish.lazurite.alias')
-				password property('publish.lazurite.secret')
-			}
+	publications {
+		mavenJava(MavenPublication) {
+			from(components["java"])
 		}
 	}
-
-	publications {
-		corduroy MavenPublication, {
-			from components.java
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = "https://maven.pkg.github.com/Eufonia-Studio/ARRP"
+			credentials {
+				username = System.getenv("GITHUB_ACTOR")
+				password = System.getenv("GITHUB_TOKEN")
+			}
 		}
 	}
 }
